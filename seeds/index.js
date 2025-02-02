@@ -13,11 +13,9 @@ const User = require(path.join(__dirname, "../models/user"));
 const cities = require(path.join(__dirname, "cities"));
 const { places, descriptors } = require(path.join(__dirname, "seedHelpers"));
 
-const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
-const mapBoxToken = process.env.MAPBOX_TOKEN;
-const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
 
-mongoose.connect("mongodb://localhost:27017/yelp-camp")
+mongoose.connect(dbUrl)
     .then(() => console.log("Database connected."))
     .catch(err => console.log(`Connection error: ${err}.`));
 
